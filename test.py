@@ -6,15 +6,11 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
-import json
-import os
 
 # -------------- 1. 설정 및 초기화 함수 --------------
 
 def initialize_app():
-    """
-    앱의 기본 설정과 세션 상태를 초기화하는 함수
-    """
+    """앱의 기본 설정과 세션 상태를 초기화하는 함수"""
     # 페이지 설정
     st.set_page_config(
         page_title="퇴원 후 나홀로 집: 나만의 퇴원 계획 짜기",
@@ -29,9 +25,7 @@ def initialize_app():
     initialize_session_state()
 
 def load_css():
-    """
-    앱의 스타일을 정의하는 CSS를 로드하는 함수
-    """
+    """앱의 스타일을 정의하는 CSS를 로드하는 함수"""
     st.markdown("""
         <style>
         .main-header {
@@ -74,9 +68,7 @@ def load_css():
     """, unsafe_allow_html=True)
 
 def initialize_session_state():
-    """
-    세션 상태 변수들을 초기화하는 함수
-    """
+    """세션 상태 변수들을 초기화하는 함수"""
     # 기본 사용자 정보
     if 'plan_created' not in st.session_state:
         st.session_state.plan_created = False
@@ -104,9 +96,7 @@ def initialize_session_state():
 # -------------- 2. 데이터 관련 함수 --------------
 
 def load_recovery_tasks():
-    """
-    퇴원 유형별 권장 할 일 목록 데이터를 반환하는 함수
-    """
+    """퇴원 유형별 권장 할 일 목록 데이터를 반환하는 함수"""
     return {
         "수술 후 회복": [
             "상처 소독하기 (하루 1-2회)",
@@ -150,26 +140,10 @@ def load_recovery_tasks():
         ]
     }
 
-def save_user_data():
-    """
-    현재 사용자 데이터를 저장하는 함수 (확장성을 위해 준비)
-    """
-    # 실제 구현 시 파일이나 데이터베이스에 저장하는 코드 추가
-    pass
-
-def load_user_data():
-    """
-    사용자 데이터를 불러오는 함수 (확장성을 위해 준비)
-    """
-    # 실제 구현 시 파일이나 데이터베이스에서 불러오는 코드 추가
-    pass
-
 # -------------- 3. UI 컴포넌트 함수 --------------
 
 def render_sidebar():
-    """
-    사이드바 UI를 렌더링하는 함수
-    """
+    """사이드바 UI를 렌더링하는 함수"""
     with st.sidebar:
         st.markdown("### 내 정보 입력하기")
         
@@ -177,4 +151,12 @@ def render_sidebar():
             # 새 계획 생성 폼
             user_name = st.text_input("이름을 입력해주세요:", value=st.session_state.user_name)
             
-            recovery_types = list(load_recovery_tasks
+            recovery_types = list(load_recovery_tasks().keys())
+            recovery_type = st.selectbox(
+                "퇴원 유형을 선택해주세요:",
+                recovery_types,
+                index=0 if not st.session_state.recovery_type else recovery_types.index(st.session_state.recovery_type)
+            )
+            
+            discharge_date = st.date_input(
+                "퇴원일을 선택해주세요
