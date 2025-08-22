@@ -3,8 +3,3 @@ streamlit
 pandas
 matplotlib
 numpy
-# 여기 부분을 수정해야 해
-if st.button("계획 만들기"):
-    # 코드 내용...
-    # st.experimental_rerun() 이 부분을
-    st.rerun()  # 이렇게 바꿔!
