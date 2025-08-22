@@ -1,2 +1,2 @@
 import streamlit as st
-st.title('streamlit app')
+st.title('ㅇㅇ')
