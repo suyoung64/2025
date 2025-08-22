@@ -150,14 +150,14 @@ def load_recovery_tasks():
         ]
     }
 
-def save_data():
+def save_user_data():
     """
     현재 사용자 데이터를 저장하는 함수 (확장성을 위해 준비)
     """
     # 실제 구현 시 파일이나 데이터베이스에 저장하는 코드 추가
     pass
 
-def load_data():
+def load_user_data():
     """
     사용자 데이터를 불러오는 함수 (확장성을 위해 준비)
     """
@@ -177,6 +177,4 @@ def render_sidebar():
             # 새 계획 생성 폼
             user_name = st.text_input("이름을 입력해주세요:", value=st.session_state.user_name)
             
-            recovery_types = list(load_recovery_tasks().keys())
-            recovery_type = st.selectbox(
-                "
+            recovery_types = list(load_recovery_tasks
